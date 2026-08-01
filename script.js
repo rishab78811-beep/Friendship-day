@@ -204,11 +204,12 @@ function stopHold(){
 
 }
 
+// Hold button (Desktop + Mobile + Auto unlock)
+
 holdBtn.addEventListener("mousedown", startHold);
 holdBtn.addEventListener("mouseup", stopHold);
 holdBtn.addEventListener("mouseleave", stopHold);
 
-// Mobile Support
 holdBtn.addEventListener("touchstart", function(e){
     e.preventDefault();
     startHold();
@@ -216,6 +217,26 @@ holdBtn.addEventListener("touchstart", function(e){
 
 holdBtn.addEventListener("touchend", stopHold);
 holdBtn.addEventListener("touchcancel", stopHold);
+
+
+// Auto unlock after 3 seconds (if hold doesn't work)
+
+setTimeout(function(){
+
+    if(scene6.style.display !== "none"){
+
+        holdStatus.innerHTML = "Unlocked! 🎉";
+
+        setTimeout(function(){
+
+            scene6.style.display = "none";
+            scene7.style.display = "block";
+
+        },500);
+
+    }
+
+},3000);
 continue7.onclick=function(){
 
     scene7.style.display="none";
