@@ -176,20 +176,21 @@ scene6.style.display = "block";
 
 }
 
+
 let holdTimer;
 
-holdBtn.onmousedown=function(){
+function startHold(){
 
-    holdStatus.innerHTML="Keep Holding... ⏳";
+    holdStatus.innerHTML = "Keep Holding... ⏳";
 
-    holdTimer=setTimeout(function(){
+    holdTimer = setTimeout(function(){
 
-        holdStatus.innerHTML="Unlocked! 🎉";
+        holdStatus.innerHTML = "Unlocked! 🎉";
 
         setTimeout(function(){
 
-            scene6.style.display="none";
-scene7.style.display="block";
+            scene6.style.display = "none";
+            scene7.style.display = "block";
 
         },1000);
 
@@ -197,18 +198,24 @@ scene7.style.display="block";
 
 }
 
-holdBtn.onmouseup=function(){
+function stopHold(){
 
     clearTimeout(holdTimer);
 
 }
 
-holdBtn.onmouseleave=function(){
+holdBtn.addEventListener("mousedown", startHold);
+holdBtn.addEventListener("mouseup", stopHold);
+holdBtn.addEventListener("mouseleave", stopHold);
 
-    clearTimeout(holdTimer);
+// Mobile Support
+holdBtn.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    startHold();
+});
 
-}
-
+holdBtn.addEventListener("touchend", stopHold);
+holdBtn.addEventListener("touchcancel", stopHold);
 continue7.onclick=function(){
 
     scene7.style.display="none";
